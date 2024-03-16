@@ -9,6 +9,7 @@ import Income from './Components/Income/Income';
 import Expenses from './Components/Expenses/Expenses';
 import { useGlobalContext } from './context/globalContext';
 import Transactions from './Components/Transactions/Transactions';
+import Averages from './Components/Averages/Averages';
 
 function App() {
   const [active, setActive] = useState(1);
@@ -44,7 +45,7 @@ function App() {
       case 4:
         return <Expenses />;
       default:
-        return <Dashboard />;
+        return <Averages />;
     }
   };
 
