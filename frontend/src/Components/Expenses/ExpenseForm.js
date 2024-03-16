@@ -74,14 +74,15 @@ function ExpenseForm() {
                     <option value="groceries">Groceries</option>
                     <option value="health">Health</option>
                     <option value="subscriptions">Subscriptions</option>
-                    <option value="takeaways">Takeaways</option>
+                    <option value="takeaways">Fast Food</option>
                     <option value="clothing">Clothing</option>  
                     <option value="travelling">Travelling</option>  
+                    <option value="gas">Gas</option>
                     <option value="other">Other</option>  
                 </select>
             </div>
             <div className="input-control">
-                <textarea name="description" value={description} placeholder='Add A Reference' id="description" cols="30" rows="4" onChange={handleInput('description')}></textarea>
+                <textarea name="description" value={description} placeholder='Add a description' id="description" cols="30" rows="4" onChange={handleInput('description')}></textarea>
             </div>
             <div className="submit-btn">
                 <Button 

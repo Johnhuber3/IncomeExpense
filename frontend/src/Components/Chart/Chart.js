@@ -13,7 +13,7 @@ import {Chart as ChartJs,
 import {Line} from 'react-chartjs-2'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context/globalContext'
-import { dateFormat } from '../../utils/dateFormat'
+import { getLastNDays, dateFormat } from '../../utils/dateFormat'
 
 ChartJs.register(
     CategoryScale,
@@ -27,38 +27,47 @@ ChartJs.register(
 )
 
 function Chart() {
-    const {incomes, expenses} = useGlobalContext()
+    const { incomes, expenses } = useGlobalContext();
 
-    const data = {
-        labels: incomes.map((inc) =>{
-            const {date} = inc
-            return dateFormat(date)
-        }),
-        datasets: [
-            {
-                label: 'Income',
-                data: [
-                    ...incomes.map((income) => {
-                        const {amount} = income
-                        return amount
-                    })
-                ],
-                backgroundColor: 'green',
-                tension: .2
-            },
-            {
-                label: 'Expenses',
-                data: [
-                    ...expenses.map((expense) => {
-                        const {amount} = expense
-                        return amount
-                    })
-                ],
-                backgroundColor: 'red',
-                tension: .2
-            }
-        ]
+  // Get the last 30 days
+  const last30Days = getLastNDays(30);
+
+  // Initialize arrays for income and expenses for each day
+  const incomeByDay = Array(30).fill(0);
+  const expensesByDay = Array(30).fill(0);
+
+  // Fill income and expenses arrays
+  incomes.forEach((income) => {
+    const index = last30Days.indexOf(dateFormat(income.date));
+    if (index !== -1) {
+      incomeByDay[index] += income.amount;
     }
+  });
+
+  expenses.forEach((expense) => {
+    const index = last30Days.indexOf(dateFormat(expense.date));
+    if (index !== -1) {
+      expensesByDay[index] += expense.amount;
+    }
+  });
+
+  const data = {
+    labels: last30Days,
+    datasets: [
+      {
+        label: 'Income',
+        data: incomeByDay,
+        backgroundColor: 'green',
+        tension: 0.2,
+      },
+      {
+        label: 'Expenses',
+        data: expensesByDay,
+        backgroundColor: 'red',
+        tension: 0.2,
+      },
+    ],
+  };
 
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { dateFormat } from '../../utils/dateFormat';
-import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/Icons';
+import { book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/Icons';
 import Button from '../Button/Button';
 
 function IncomeItem({
@@ -26,12 +26,14 @@ function IncomeItem({
                 return stocks;
             case 'stocks':
                 return users;
-            case 'bitcoin':
-                return bitcoin;
+            case 'sportsbet':
+                return piggy;
             case 'bank':
                 return card;
             case 'youtube':
                 return yt;
+            case 'gambling':
+                return piggy;
             case 'other':
                 return piggy;
             default:
@@ -55,6 +57,8 @@ function IncomeItem({
                 return clothing;
             case 'travelling':
                 return freelance;
+            case 'gas':
+                return circle;
             case 'other':
                 return circle;
             default:

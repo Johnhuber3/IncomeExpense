@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../context/globalContext';
 
-function History() {
-    const {transactionHistory} = useGlobalContext()
+function TransactionHistory() {
+    const {fulltransactionHistory} = useGlobalContext()
 
-    const [...history] = transactionHistory()
+    const [...history] = fulltransactionHistory()
 
     return (
         <HistoryStyled>
-            <h2>Recent Transactions</h2>
+            <h2>Recent History</h2>
             {history.map((item) =>{
                 const {_id, title, amount, type} = item
                 return (
@@ -50,4 +50,4 @@ const HistoryStyled = styled.div`
     }
 `;
 
-export default History
+export default TransactionHistory
